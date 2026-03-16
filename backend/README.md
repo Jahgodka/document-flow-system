@@ -1,52 +1,23 @@
-# Document Flow System (Backend)
+# Document Flow System - Backend API
 
-A Proof of Concept (PoC) for an Enterprise Content Management (ECM) system, designed to handle document workflows using a REST API architecture.
+The core REST API for the ECM system, responsible for data persistence, business logic, and document workflow management.
 
 ## Tech Stack
 * **Java 21**
-* **Spring Boot 3.x** (Spring Web, Spring Data JPA)
-* **PostgreSQL** (Docker)
+* **Spring Boot 3.x** (Web, Data JPA)
+* **PostgreSQL** (via Docker)
 * **Lombok**
 * **Maven**
 
-## Requirements
-- **Docker**
-- **Java 21**
-
 ## Local Setup
 
-1. Start the PostgreSQL database instance using Docker:
+1. Start the database instance:
+```bash
+docker compose up -d
+```
 
-   ```bash
-   docker compose up -d
-   ```
-
-2. Run the application using the integrated Maven Wrapper:
-
-    ```bash
-    ./mvnw spring-boot:run
-    ```
-
-    The application will start on:
-
-    ```
-    http://localhost:8080
-    ```
-
-    ---
-
-## API Endpoints
-
-Example endpoints available in the application:
-
-    ```http
-    GET /documents
-    ```
-
-Returns a list of documents.
-
-    ```http
-    POST /documents
-    ```
-
-Creates a new document.
+2. Run the application:
+```bash
+./mvnw spring-boot:run
+```
+The server listens on port 8080 by default. Cross-Origin Resource Sharing (CORS) is configured to accept requests from the local Angular dev server (http://localhost:4200)
