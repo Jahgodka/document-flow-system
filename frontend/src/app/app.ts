@@ -48,10 +48,26 @@ export class App implements OnInit {
       next: (savedDoc) => {
         this.documents.push(savedDoc);
         this.newDocument = { title: '', content: '', status: '' };
+        // Ręcznie wymuszamy odświeżenie widoku HTML.
+        // Po asynchronicznym strzale do zewnętrznego API, Angular "przesypia" zmiany
         this.cdr.detectChanges();
       },
       error: (err) => {
         console.error('Błąd tworzenia dokumentu:', err);
+      }
+    });
+  }
+
+  onDelete(id: number | undefined): void {
+    if (!id) return;
+
+    this.documentService.deleteDocument(id).subscribe({
+      next: () => {
+        this.documents = this.documents.filter(doc => doc.id !== id);
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.error('Błąd usuwania dokumentu:', err);
       }
     });
   }

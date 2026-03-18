@@ -25,4 +25,8 @@ export class DocumentService {
   createDocument(doc: Document): Observable<Document> {
     return this.http.post<Document>(this.apiUrl, doc);
   }
+
+  deleteDocument(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 }

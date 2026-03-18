@@ -1,52 +1,43 @@
-<div style="max-width: 800px; margin: 0 auto; padding: 20px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+<div class="container">
+  <h1 class="header">System Obiegu Dokumentów</h1>
   
-  <h1 style="color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px;">
-    System Obiegu Dokumentów
-  </h1>
-  
-  <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 30px; border: 1px solid #e9ecef;">
-    <h2 style="margin-top: 0; font-size: 1.2rem; color: #495057;">Dodaj nowy dokument</h2>
+  <div class="form-card">
+    <h2>Dodaj nowy dokument</h2>
     
     <form (ngSubmit)="onSubmit()">
-      <div style="margin-bottom: 15px;">
-        <label style="display: block; margin-bottom: 5px; font-weight: bold; font-size: 0.9rem;">Tytuł dokumentu:</label>
-        <input type="text" [(ngModel)]="newDocument.title" name="title" required 
-               style="width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 4px; box-sizing: border-box;">
+      <div class="form-group">
+        <label>Tytuł dokumentu:</label>
+        <input type="text" [(ngModel)]="newDocument.title" name="title" required>
       </div>
       
-      <div style="margin-bottom: 15px;">
-        <label style="display: block; margin-bottom: 5px; font-weight: bold; font-size: 0.9rem;">Treść:</label>
-        <textarea [(ngModel)]="newDocument.content" name="content" required rows="4"
-                  style="width: 100%; padding: 10px; border: 1px solid #ced4da; border-radius: 4px; box-sizing: border-box; resize: vertical;"></textarea>
+      <div class="form-group">
+        <label>Treść:</label>
+        <textarea [(ngModel)]="newDocument.content" name="content" required rows="4"></textarea>
       </div>
       
-      <button type="submit" style="background: #3498db; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-weight: bold;">
-        Wgraj do systemu
-      </button>
+      <button type="submit" class="btn-submit">Wgraj do systemu</button>
     </form>
   </div>
 
-  <h2 style="font-size: 1.2rem; color: #495057;">Ostatnie dokumenty</h2>
+  <h2 class="list-title">Ostatnie dokumenty</h2>
   
   @if (documents.length === 0) {
-    <p style="color: #6c757d; font-style: italic; text-align: center; padding: 20px; background: #f8f9fa; border-radius: 8px;">
-      Brak dokumentów w bazie danych.
-    </p>
+    <p class="empty-state">Brak dokumentów w bazie danych.</p>
   }
 
   @for (doc of documents; track doc.id) {
-    <div style="background: white; border: 1px solid #e0e0e0; margin-bottom: 15px; padding: 15px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
-      
-      <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f1f1f1; padding-bottom: 10px; margin-bottom: 10px;">
-        <h3 style="margin: 0; color: #2c3e50; font-size: 1.1rem;">{{ doc.title }}</h3>
-        <span style="background: #e9ecef; color: #495057; font-size: 0.8rem; padding: 4px 8px; border-radius: 12px; font-weight: bold;">
-          Status: {{ doc.status }}
-        </span>
+    <div class="document-card">
+      <div class="card-header">
+        <h3>{{ doc.title }}</h3>
+        
+        <div class="actions">
+          <span class="status-badge">Status: {{ doc.status }}</span>
+          <button (click)="onDelete(doc.id)" class="btn-delete">Usuń</button>
+        </div>
       </div>
       
-      <p style="color: #555; line-height: 1.5; margin: 0 0 10px 0;">{{ doc.content }}</p>
-      <small style="color: #adb5bd;">ID w bazie: {{ doc.id }}</small>
+      <p class="content">{{ doc.content }}</p>
+      <small class="meta">ID w bazie: {{ doc.id }}</small>
     </div>
   }
-  
 </div>
