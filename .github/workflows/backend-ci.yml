@@ -1,9 +1,19 @@
-# ... reszta pliku bez zmian ...
-    services:
+name: Backend CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build: 
+    runs-on: ubuntu-latest
+
+    services: 
       postgres:
         image: postgres:15
         env:
-          # MUSI być zgodne z Twoim app.properties
           POSTGRES_DB: document_flow_db
           POSTGRES_USER: portfolio_user
           POSTGRES_PASSWORD: portfolio_password
@@ -25,7 +35,7 @@
           distribution: 'temurin'
           cache: maven
 
-      - name: Build with Maven
+      - name: Build and Test with Maven
         env:
           SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/document_flow_db
           SPRING_DATASOURCE_USERNAME: portfolio_user
