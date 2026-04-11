@@ -1,23 +1,12 @@
-name: Backend CI
-
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    # GitHub podnosi bazę w tle
+# ... reszta pliku bez zmian ...
     services:
       postgres:
         image: postgres:15
         env:
-          POSTGRES_USER: user
-          POSTGRES_PASSWORD: password
-          POSTGRES_DB: document_flow
+          # MUSI być zgodne z Twoim app.properties
+          POSTGRES_DB: document_flow_db
+          POSTGRES_USER: portfolio_user
+          POSTGRES_PASSWORD: portfolio_password
         ports:
           - 5432:5432
         options: >-
@@ -38,7 +27,7 @@ jobs:
 
       - name: Build with Maven
         env:
-          SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/document_flow
+          SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/document_flow_db
           SPRING_DATASOURCE_USERNAME: portfolio_user
           SPRING_DATASOURCE_PASSWORD: portfolio_password
           GEMINI_API_KEY: OFFLINE_MODE
