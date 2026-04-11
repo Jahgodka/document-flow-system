@@ -18,7 +18,7 @@ public class DocumentAnalyzerService {
     // Domyślny konwerter Springa (RestClient) gubi się przy klasie abstrakcyjnej JsonNode,
     private final ObjectMapper objectMapper;
 
-    @Value("${gemini.api.key}")
+    @Value("${gemini.api.key:OFFLINE_MODE}")
     private String apiKey;
 
     public DocumentAnalyzerService() {

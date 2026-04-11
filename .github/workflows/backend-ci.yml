@@ -40,8 +40,8 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Build and Test with Maven
+    - name: Build with Maven
       run: |
         cd backend
         chmod +x mvnw
-        ./mvnw clean install
+        ./mvnw clean install -DskipTests=false
